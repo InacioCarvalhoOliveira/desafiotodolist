@@ -2,6 +2,7 @@ package br.com.inaciooliveira.desafiotodolist.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,9 @@ import br.com.inaciooliveira.desafiotodolist.repository.TodoRepository;
 @Service
 public class TodoService {
 
-    private TodoRepository todoRepository;
+    private final TodoRepository todoRepository;
 
+    @Autowired
     public TodoService(TodoRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
@@ -25,9 +27,9 @@ public class TodoService {
         return todoRepository.save(todo);
     }
 
-    public String deleteById(Long id) {
+    public List<Todo> deleteById(Long id) {
         todoRepository.deleteById(id);
-        return ("Task Successfully Deleted");
+        return findAll();
     }
 
     public Todo findById(Long id) {
@@ -35,12 +37,12 @@ public class TodoService {
     }
 
     public List<Todo> findAll() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "priority");
-        sort = sort.and(Sort.by(Sort.Direction.ASC, "name"));
+        Sort sort = Sort.by(Sort.Direction.ASC, "priority");
+        sort = sort.and((Sort.by(Sort.Direction.ASC, "isdone")));
         return todoRepository.findAll(sort);
     }
 
-    public List<Todo> findByDone(boolean done) {
-        return todoRepository.findByDone(done);
+    public List<Todo> findByDone(boolean isdone) {
+        return todoRepository.findByIsdone(isdone);
     }
 }

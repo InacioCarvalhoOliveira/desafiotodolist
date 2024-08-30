@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.inaciooliveira.desafiotodolist.entity.Todo;
 
 public interface TodoRepository  extends JpaRepository<Todo, Long> {
+    List<Todo> findByIsdone(boolean isdone);
 
-    List<Todo> findByDone(boolean done);
 
 } 

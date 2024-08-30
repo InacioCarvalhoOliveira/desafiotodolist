@@ -1,5 +1,12 @@
 package br.com.inaciooliveira.desafiotodolist.entity;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +24,16 @@ public class Todo {
     private String description;
     private boolean isdone;
     private int priority;
+
+
+
+    public Todo(String name, String description, boolean isdone, int priority) {
+        this.name = name;
+        this.description = description;
+        this.isdone = isdone;
+        this.priority = priority;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -35,18 +52,17 @@ public class Todo {
     public void setDescription(String description) {
         this.description = description;
     }
-    public boolean isDone() {
+    public boolean getIsdone() {
         return isdone;
     }
-    public void setDone(boolean done) {
-        this.isdone = done;
+    public void setIsdone(boolean isdone) {
+        this.isdone = isdone;
     }
     public int getPriority() {
         return priority;
     }
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-    
+    }  
     
 }
