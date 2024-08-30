@@ -12,27 +12,34 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "todo")
 public class Todo {
-
+    
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String description;
     private boolean isdone;
+    @NotEmpty
     private int priority;
-
-
-
+    
+    public Todo() {
+    } 
     public Todo(String name, String description, boolean isdone, int priority) {
         this.name = name;
         this.description = description;
         this.isdone = isdone;
         this.priority = priority;
     }
+
     
     public Long getId() {
         return id;

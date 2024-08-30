@@ -2,10 +2,12 @@ package br.com.inaciooliveira.desafiotodolist.controller;
 
 import br.com.inaciooliveira.desafiotodolist.entity.Todo;
 import br.com.inaciooliveira.desafiotodolist.service.TodoService;
+import jakarta.validation.Valid;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,8 +22,10 @@ public class TodoController {
     }
 
     @PostMapping
-    public Todo save(@RequestBody Todo todo) {
-        return todoService.save(todo);
+    public ResponseEntity<Todo> save(@RequestBody @Valid Todo todo) {
+        Todo savedTodo = todoService.save(todo);
+        return new ResponseEntity<Todo>(savedTodo, HttpStatus.CREATED);
+
     }
 
     @PutMapping
